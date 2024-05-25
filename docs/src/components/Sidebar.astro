@@ -1,0 +1,41 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import { getFormattedStars } from "../lib/github";
+import { getAllGuides } from "../lib/guide";
+
+export interface Props {
+  activePath: string;
+}
+
+const { activePath, groupedGuides, activeGuideTitle } = Astro.props;
+---
+<div id="docs-sidebar" class="hidden md:block w-[200px] lg:w-[350px] border-r border-gray-200 text-right min-h-screen flex-shrink-0">
+  <div class="relative sh:sticky top-0">
+    <div class="justify-end flex pt-10 pb-5 px-5">
+      <a href="/" class="block items-center justify-end mb-2">
+        <img src="/guidme.png" alt="Astro" class="w-[150px]" />
+      </a>
+    </div>
+
+    {Object.keys(groupedGuides).map(groupTitle => {
+      const guides = groupedGuides[groupTitle];
+
+      return (
+        <>
+          <h2 class="text-xl font-bold mb-2 pr-5 relative">{groupTitle}</h2>
+          <ul class="text-gray-400 mb-5">
+            {guides.map(guide => {
+              const guidePath = `/docs/${guide.slug}`;
+              return (
+                <li class="mb-2">
+                  <a href={guidePath}
+                     class:list={["hover:text-black pr-5 py-2", { "text-black": activeGuideTitle === guide.data.title }]}>{guide.data.title}</a>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      );
+    })}
+  </div>
+</div>

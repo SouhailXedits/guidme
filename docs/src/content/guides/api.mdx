@@ -1,0 +1,65 @@
+---
+title: "API Reference"
+groupTitle: "Introduction"
+sort: 4
+---
+
+Here is the list of methods provided by `guidme` when you initialize it.
+
+> **Note:** We have omitted the configuration options for brevity. Please look at the configuration section for the options. Links are provided in the description below.
+
+```javascript
+import { guidme } from "guidme";
+import "guidme/dist/guidme.css";
+
+// Look at the configuration section for the options
+// https://guidme.com/docs/configuration#guidme-configuration
+const guidme = guidme({ /* ... */ });
+
+// --------------------------------------------------
+// guidme is an object with the following methods
+// --------------------------------------------------
+
+// Start the tour using `steps` given in the configuration
+guidme.drive();  // Starts at step 0
+guidme.drive(4); // Starts at step 4
+
+guidme.moveNext(); // Move to the next step
+guidme.movePrevious(); // Move to the previous step
+guidme.moveTo(4); // Move to the step 4
+guidme.hasNextStep(); // Is there a next step
+guidme.hasPreviousStep() // Is there a previous step
+
+guidme.isFirstStep(); // Is the current step the first step
+guidme.isLastStep(); // Is the current step the last step
+
+guidme.getActiveIndex(); // Gets the active step index
+
+guidme.getActiveStep(); // Gets the active step configuration
+guidme.getPreviousStep(); // Gets the previous step configuration
+guidme.getActiveElement(); // Gets the active HTML element
+guidme.getPreviousElement(); // Gets the previous HTML element
+
+// Is the tour or highlight currently active
+guidme.isActive();
+
+// Recalculate and redraw the highlight
+guidme.refresh();
+
+// Look at the configuration section for configuration options
+// https://guidme.com/docs/configuration#guidme-configuration
+guidme.getConfig();
+guidme.setConfig({ /* ... */ });
+
+guidme.setSteps([ /* ... */ ]); // Set the steps
+
+// Look at the state section of configuration for format of the state
+// https://guidme.com/docs/configuration#state
+guidme.getState();
+
+// Look at the GuidmeStep section of configuration for format of the step
+// https://guidme.com/docs/configuration/#drive-step-configuration
+guidme.highlight({ /* ... */ }); // Highlight an element
+
+guidme.destroy(); // Destroy the tour
+```

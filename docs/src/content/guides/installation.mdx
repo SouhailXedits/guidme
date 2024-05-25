@@ -1,0 +1,62 @@
+---
+title: "Installation"
+groupTitle: "Introduction"
+sort: 1
+---
+
+Run one of the following commands to install the package:
+
+```bash
+# Using npm
+npm install guidme
+
+# Using pnpm
+pnpm install guidme
+
+# Using yarn
+yarn add guidme
+```
+
+Alternatively, you can use CDN and include the script in your HTML file:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/guidme@1.0.1/dist/guidme.iife.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/guidme@1.0.1/dist/guidme.css"/>
+```
+
+## Start Using
+Once installed, you can import the package in your project. The following example shows how to highlight an element:
+
+```js
+import { guidme } from "guidme";
+import "guidme/dist/guidme.css";
+
+const guidme = guidme();
+guidme.highlight({
+  element: "#some-element",
+  popover: {
+    title: "Title",
+    description: "Description"
+  }
+});
+```
+
+### Note on CDN
+
+If you are using the CDN, you will have to use the package from the `window` object:
+
+```js
+const guidme = window.guidme.guidme;
+
+const guidme = guidme();
+
+guidme.highlight({
+  element: "#some-element",
+  popover: {
+    title: "Title",
+    description: "Description"
+  }
+});
+```
+
+Continue reading the [Getting Started](/docs/basic-usage) guide to learn more about the package.

@@ -1,0 +1,305 @@
+---
+title: "Popover Buttons"
+groupTitle: "Examples"
+sort: 9
+---
+
+import { CodeSample } from "../../components/CodeSample.tsx";
+
+You can use the `showButtons` option to choose which buttons to show in the popover. The default value is `['next', 'previous', 'close']`.
+
+<div id="guidme-note" className="mb-5">
+  > **Note:** When using the `highlight` method to highlight a single element, the only button shown is the `close`
+  button. However, you can use the `showButtons` option to show other buttons as well. But the buttons won't do
+  anything. You will have to use the `onNextClick` and `onPreviousClick` callbacks to implement the functionality.
+</div>
+
+<div className='flex flex-col gap-1'>
+  <CodeSample
+    buttonText={"Show All Buttons"}
+    config={{
+      showButtons: [
+        'next',
+        'previous',
+        'close'
+      ],
+    }}
+    tour={[
+      {
+        element: '#guidme-note',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      },
+      {
+        element: '#guidme-note p code:nth-child(4)',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      }
+    ]}
+    id={"code-sample"}
+    client:load>
+    ```js
+    import { guidme } from "guidme";
+    import "guidme/dist/guidme.css";
+
+    const guidme = guidme({
+      showButtons: [
+        'next',
+        'previous',
+        'close'
+      ],
+      steps: [
+        {
+          element: '#first-element',
+          popover: {
+            title: 'Popover Title',
+            description: 'Popover Description'
+          }
+        },
+        {
+          element: '#second-element',
+          popover: {
+            title: 'Popover Title',
+            description: 'Popover Description'
+          }
+        }
+      ]
+    });
+
+    guidme.drive();
+    ```
+  </CodeSample>
+  <CodeSample
+    buttonText="No Close Button"
+    config={{
+      showButtons: [
+        'next',
+        'previous',
+      ],
+    }}
+    tour={[
+      {
+        element: '#guidme-note',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      },
+      {
+        element: '#guidme-note code:nth-child(2)',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      }
+    ]}
+    id={"code-sample"}
+    client:load />
+  <CodeSample
+    buttonText="No Buttons (Use Arrows)"
+    config={{
+      showButtons: [undefined],
+    }}
+    tour={[
+      {
+        element: '#guidme-note',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      },
+      {
+        element: '#guidme-note code:nth-child(2)',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description',
+          side: 'bottom',
+          align: 'start'
+        }
+      }
+    ]}
+    id={"code-sample"}
+    client:load />
+</div>
+
+## Change Button Text
+
+You can also change the text of buttons using `nextBtnText`, `prevBtnText` and `doneBtnText` options.
+
+<div className='flex flex-col gap-1'>
+  <CodeSample
+    heading="Change Button Text"
+    buttonText={"Change Button Text"}
+    config={{
+      showProgress: true,
+      nextBtnText: '—>',
+      prevBtnText: '<--',
+      doneBtnText: 'X',
+    }}
+    tour={[
+      {
+        element: '#code-sample-3',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      },
+      {
+        element: '#code-sample-3 code',
+        popover: {
+          title: 'Popover Title',
+          description: 'Popover Description'
+        }
+      }
+    ]}
+    id={"code-sample-3"}
+    client:load>
+    ```js
+    import { guidme } from "guidme";
+    import "guidme/dist/guidme.css";
+
+    const guidme = guidme({
+      nextBtnText: '—›',
+      prevBtnText: '‹—',
+      doneBtnText: '✕',
+      showProgress: true,
+      steps: [
+        // ...
+      ]
+    });
+
+    guidme.drive();
+    ```
+  </CodeSample>
+</div>
+
+## Event Handlers
+
+You can use the `onNextClick`, `onPreviousClick` and `onCloseClick` callbacks to implement custom functionality when the user clicks on the next and previous buttons.
+
+> Please note that when you configure these callbacks, the default functionality of the buttons will be disabled. You will have to implement the functionality yourself.
+
+<CodeSample
+  buttonText={"Show Example"}
+  config={{}}
+  tour={[
+    {
+      element: '#logger-events',
+      popover: {
+        title: 'Events Logged',
+        description: 'Look at your console for the events logged'
+      }
+    },
+    {
+      element: '#code-sample-4 code',
+      popover: {
+        title: 'Popover Title',
+        description: 'Popover Description'
+      }
+    }
+  ]}
+  id={"logger-events"}
+  client:load>
+  ```js
+  import { guidme } from "guidme";
+  import "guidme/dist/guidme.css";
+
+  const guidme = guidme({
+    onNextClick:() => {
+      console.log('Next Button Clicked');
+      // Implement your own functionality here
+      guidme.moveNext();
+    },
+    onPrevClick:() => {
+      console.log('Previous Button Clicked');
+      // Implement your own functionality here
+      guidme.movePrevious();
+    },
+    onCloseClick:() => {
+      console.log('Close Button Clicked');
+      // Implement your own functionality here
+      guidme.destroy();
+    },
+    steps: [
+      // ...
+    ]
+  });
+
+  guidme.drive();
+  ```
+</CodeSample>
+
+## Custom Buttons
+
+You can add custom buttons using `onPopoverRender` callback. This callback is called before the popover is rendered. In the following example, we are adding a custom button that takes the user to the first step.
+
+
+<CodeSample
+  buttonText={"Run Example"}
+  config={{
+    prevBtnText: '&larr; Previous',
+    nextBtnText: 'Next &rarr;',
+    doneBtnText: 'Done',
+    showButtons: ['next', 'previous'],
+  }}
+  tour={[
+    {
+      element: '#demo-hook-theme',
+      popover: {
+        align: 'start',
+        side: 'left',
+        title: 'More Control with Hooks',
+        description: 'You can use onPopoverRender hook to modify the popover DOM. Here we are adding a custom button to the popover which takes the user to the first step.'
+      }
+    },
+    {
+      element: 'h1',
+      popover: {
+        align: 'start',
+        side: 'bottom',
+        title: 'Style However You Want',
+        description: 'You can use the default class names and override the styles or you can pass a custom class name to the popoverClass option either globally or per step.'
+      }
+    },
+    {
+      element: 'p a',
+      popover: {
+        align: 'start',
+        side: 'left',
+        title: 'Style However You Want',
+        description: 'You can use the default class names and override the styles or you can pass a custom class name to the popoverClass option either globally or per step.'
+      }
+    }
+  ]}
+  id={"demo-hook-theme"}
+  client:load
+>
+  ```js
+  import { guidme } from "guidme";
+  import "guidme/dist/guidme.css";
+
+  const guidme = guidme({
+    // Get full control over the popover rendering.
+    // Here we are adding a custom button that takes
+    // user to the first step.
+    onPopoverRender: (popover, { config, state }) => {
+      const firstButton = document.createElement("button");
+      firstButton.innerText = "Go to First";
+      popover.footerButtons.appendChild(firstButton);
+
+      firstButton.addEventListener("click", () => {
+        guidme.drive(0);
+      });
+    },
+    steps: [
+      // ..
+    ]
+  });
+
+  guidme.drive();
+  ```
+</CodeSample>

@@ -1,0 +1,87 @@
+---
+title: "Async Tour"
+groupTitle: "Examples"
+sort: 3
+---
+
+import { CodeSample } from "../../components/CodeSample.tsx";
+
+You can also have async steps in your tour. This is useful when you want to load some data from the server and then show the tour.
+
+<CodeSample
+  heading={'Asynchronous Tour'}
+  tour={[
+    {
+      element: '.line:nth-child(14)',
+      popover: {
+        title: 'First Step',
+        description: 'You can add a function to override the default behavior of the next button i.e. to fetch some data from the server and then call moveNext()',
+      }
+    },
+    {
+      element: '.line:nth-child(17)',
+      popover: {
+        title: 'Manually Handle Next',
+        description: 'Here we are moving to the next step manually since guidme does not know when the data is loaded dynamically.',
+      }
+    },
+    {
+      popover: {
+        title: 'Next Step is Async',
+        description: 'This is the first step. Next element will be loaded dynamically.',
+      },
+    },
+    { element: '.dynamic-el', popover: { title: 'Async Element', description: 'This element is loaded dynamically and will be removed as soon as we move away from this step' } },
+    { popover: { title: 'Last Step', description: 'This is the last step.' } }
+  ]}
+  id={"tour-example"}
+  client:load>
+  ```js
+  import { guidme } from "guidme";
+  import "guidme/dist/guidme.css";
+
+  const guidme = guidme({
+    showProgress: true,
+    steps: [
+      {
+        popover: {
+          title: 'First Step',
+          description: 'This is the first step. Next element will be loaded dynamically.'
+          // By passing onNextClick, you can override the default behavior of the next button.
+          // This will prevent the guidme from moving to the next step automatically.
+          // You can then manually call guidme.moveNext() to move to the next step.
+          onNextClick: () => {
+            // .. load element dynamically
+            // .. and then call
+            guidme.moveNext();
+          },
+        },
+      },
+      {
+        element: '.dynamic-el',
+        popover: {
+          title: 'Async Element',
+          description: 'This element is loaded dynamically.'
+        },
+        // onDeselected is called when the element is deselected.
+        // Here we are simply removing the element from the DOM.
+        onDeselected: () => {
+          // .. remove element
+          document.querySelector(".dynamic-el")?.remove();
+        }
+      },
+      { popover: { title: 'Last Step', description: 'This is the last step.' } }
+    ]
+
+});
+
+guidme.drive();
+
+```
+</CodeSample>
+
+> **Note**: By overriding `onNextClick`, and `onPrevClick` hooks you control the navigation of the guidme. This means that user won't be able to navigate using the buttons and you will have to either call `guidme.moveNext()` or `guidme.movePrevious()` to navigate to the next/previous step.
+>
+> You can use this to implement custom logic for navigating between steps. This is also useful when you are dealing with dynamic content and want to highlight the next/previous element based on some logic.
+>
+> `onNextClick` and `onPrevClick` hooks can be configured at guidme level as well as step level. When configured at the guidme level, you control the navigation for all the steps. When configured at the step level, you control the navigation for that particular step only.

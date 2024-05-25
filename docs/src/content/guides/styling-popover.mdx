@@ -1,0 +1,207 @@
+---
+title: "Styling Popover"
+groupTitle: "Examples"
+sort: 2
+---
+
+import { CodeSample } from "../../components/CodeSample.tsx";
+
+You can either use the default class names and override the styles or you can pass a custom class name to the `popoverClass` option either globally or per step.
+
+Alternatively, if want to modify the Popover DOM, you can use the `onPopoverRender` callback to get the popover DOM element and do whatever you want with it before popover is rendered.
+
+We have added a few examples below but have a look at the [theming section](/docs/theming#styling-popover) for detailed guide including class names to target etc.
+
+<CodeSample
+  heading="Using CSS"
+  buttonText={"guidme Website Theme"}
+  config={{
+    prevBtnText: '&larr; Previous',
+    nextBtnText: 'Next &rarr;',
+    doneBtnText: 'Done',
+    showButtons: ['next', 'previous'],
+    popoverClass: 'guidme-theme'
+  }}
+  tour={[
+    {
+      element: '#demo-theme',
+      popover: {
+        align: 'start',
+        side: 'left',
+        title: 'Style However You Want',
+        description: 'You can use the default class names and override the styles or you can pass a custom class name to the popoverClass option either globally or per step.'
+      }
+    },
+    {
+      element: 'h1',
+      popover: {
+        align: 'start',
+        side: 'bottom',
+        title: 'Style However You Want',
+        description: 'You can use the default class names and override the styles or you can pass a custom class name to the popoverClass option either globally or per step.'
+      }
+    },
+    {
+      element: 'p a',
+      popover: {
+        align: 'start',
+        side: 'left',
+        title: 'Style However You Want',
+        description: 'You can use the default class names and override the styles or you can pass a custom class name to the popoverClass option either globally or per step.'
+      }
+    }
+  ]}
+  id={"demo-theme"}
+  client:load
+>
+  ```js
+  import { guidme } from "guidme";
+  import "guidme/dist/guidme.css";
+
+  const guidme = guidme({
+    popoverClass: 'guidme-theme'
+  });
+
+  guidme.highlight({
+    element: '#demo-theme',
+    popover: {
+      title: 'Style However You Want',
+      description: 'You can use the default class names and override the styles or you can pass a custom class name to the popoverClass option either globally or per step.'
+    }
+  });
+  ```
+</CodeSample>
+
+Here is the CSS used for the above example:
+
+```css
+.guidme-popover.guidme-theme {
+  background-color: #fde047;
+  color: #000;
+}
+
+.guidme-popover.guidme-theme .guidme-popover-title {
+  font-size: 20px;
+}
+
+.guidme-popover.guidme-theme .guidme-popover-title,
+.guidme-popover.guidme-theme .guidme-popover-description,
+.guidme-popover.guidme-theme .guidme-popover-progress-text {
+  color: #000;
+}
+
+.guidme-popover.guidme-theme button {
+  flex: 1;
+  text-align: center;
+  background-color: #000;
+  color: #ffffff;
+  border: 2px solid #000;
+  text-shadow: none;
+  font-size: 14px;
+  padding: 5px 8px;
+  border-radius: 6px;
+}
+
+.guidme-popover.guidme-theme button:hover {
+  background-color: #000;
+  color: #ffffff;
+}
+
+.guidme-popover.guidme-theme .guidme-popover-navigation-btns {
+  justify-content: space-between;
+  gap: 3px;
+}
+
+.guidme-popover.guidme-theme .guidme-popover-close-btn {
+  color: #9b9b9b;
+}
+
+.guidme-popover.guidme-theme .guidme-popover-close-btn:hover {
+  color: #000;
+}
+
+.guidme-popover.guidme-theme .guidme-popover-arrow-side-left.guidme-popover-arrow {
+  border-left-color: #fde047;
+}
+
+.guidme-popover.guidme-theme .guidme-popover-arrow-side-right.guidme-popover-arrow {
+  border-right-color: #fde047;
+}
+
+.guidme-popover.guidme-theme .guidme-popover-arrow-side-top.guidme-popover-arrow {
+  border-top-color: #fde047;
+}
+
+.guidme-popover.guidme-theme .guidme-popover-arrow-side-bottom.guidme-popover-arrow {
+  border-bottom-color: #fde047;
+}
+```
+
+<br/>
+
+<CodeSample
+  heading="Using Hook to Modify"
+  buttonText={"Manipulating Popover DOM"}
+  config={{
+    prevBtnText: '&larr; Previous',
+    nextBtnText: 'Next &rarr;',
+    doneBtnText: 'Done',
+    showButtons: ['next', 'previous'],
+  }}
+  tour={[
+    {
+      element: '#demo-hook-theme',
+      popover: {
+        align: 'start',
+        side: 'left',
+        title: 'More Control with Hooks',
+        description: 'You can use onPopoverRender hook to modify the popover DOM. Here we are adding a custom button to the popover which takes the user to the first step.'
+      }
+    },
+    {
+      element: 'h1',
+      popover: {
+        align: 'start',
+        side: 'bottom',
+        title: 'Style However You Want',
+        description: 'You can use the default class names and override the styles or you can pass a custom class name to the popoverClass option either globally or per step.'
+      }
+    },
+    {
+      element: 'p a',
+      popover: {
+        align: 'start',
+        side: 'left',
+        title: 'Style However You Want',
+        description: 'You can use the default class names and override the styles or you can pass a custom class name to the popoverClass option either globally or per step.'
+      }
+    }
+  ]}
+  id={"demo-hook-theme"}
+  client:load
+>
+  ```js
+  import { guidme } from "guidme";
+  import "guidme/dist/guidme.css";
+
+  const guidme = guidme({
+    // Get full control over the popover rendering.
+    // Here we are adding a custom button that takes
+    // the user to the first step.
+    onPopoverRender: (popover, { config, state }) => {
+      const firstButton = document.createElement("button");
+      firstButton.innerText = "Go to First";
+      popover.footerButtons.appendChild(firstButton);
+
+      firstButton.addEventListener("click", () => {
+        guidme.drive(0);
+      });
+    },
+    steps: [
+      // ..
+    ]
+  });
+
+  guidme.drive();
+  ```
+</CodeSample>

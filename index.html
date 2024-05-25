@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- prefetch image -->
+    <link rel="preconnect" href="https://i.imgur.com/" />
+    <title>Vite App</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      *:focus {
+        outline: 2px solid #1a73e8;
+        outline-offset: 2px;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .guidme-popover.custom-guidme-popover {
+        min-width: 450px;
+        background: #2d2d2d;
+        color: white;
+      }
+
+      .guidme-popover.custom-guidme-popover .guidme-popover-title {
+        font-size: 26px;
+      }
+
+      .guidme-popover.custom-guidme-popover .guidme-popover-description {
+        font-size: 14px;
+      }
+
+      .guidme-popover.custom-guidme-popover button {
+        background: #454545;
+        border-color: #454545;
+        text-shadow: none;
+        color: white;
+        font-size: 13px;
+        padding: 7px 10px;
+      }
+
+      .guidme-popover.custom-guidme-popover button:hover {
+        background: #575757;
+      }
+
+      .gif-popover {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .gif-popover img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .gif-popover p {
+        font-weight: 500;
+        margin-bottom: 0;
+      }
+
+      p {
+        line-height: 1.5;
+        margin-bottom: 15px;
+      }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: left;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 30px 0 10px;
+      }
+
+      h1 {
+        font-size: 48px;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      h1 sup {
+        font-size: 18px;
+        font-weight: 400;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 20px 10px 0;
+        line-height: 1.5;
+      }
+
+      ul li:before {
+        content: "•";
+        margin-right: 10px;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 10px;
+        max-width: 500px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        all: unset;
+        border: 1px solid #ccc;
+        padding: 5px 15px;
+        border-radius: 5px;
+        display: block;
+        cursor: pointer;
+      }
+
+      pre {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        background: whitesmoke;
+        border-radius: 5px;
+        padding: 10px;
+        line-height: 1.75;
+      }
+
+      #scrollable-area {
+        height: 300px;
+        overflow: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 50px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>guidme <sup>next</sup></h1>
+      </div>
+
+      <h2>Highlight Feature</h2>
+      <p>given below are the examples of simple `highlight`</p>
+      <div class="buttons">
+        <button id="highlight-btn">Animated Highlight</button>
+        <button id="simple-highlight-btn">Simple Highlight</button>
+        <button id="transition-highlight-btn">Transition Highlight</button>
+        <button id="disallow-close">Disallow Close</button>
+        <button id="dark-highlight-btn">Super Dark Highlight</button>
+        <button id="dim-highlight-btn">Super Dim Highlight</button>
+        <button id="scrollable-area-btn">Scrollable Area</button>
+        <button id="inner-scroll-area-btn">Inner Scroll Area</button>
+        <button id="without-element-btn">No Element</button>
+        <button id="is-active-btn">Is Active?</button>
+        <button id="activate-check-btn">Activate and Check</button>
+        <button id="backdrop-color-btn">Backdrop Color</button>
+        <button id="hooks">Hooks</button>
+        <button id="destroy-btn" style="border-color: red; background: red; color: white">Destroy</button>
+      </div>
+      <br />
+      <p>given below are the examples of simple `highlight`</p>
+      <div class="buttons">
+        <button id="no-buttons">No Buttons</button>
+        <button id="buttons-from-popover">Selected Buttons</button>
+        <button id="next-button">Next Button</button>
+        <button id="previous-button">Previous Buttons</button>
+        <button id="next-prev-button">Next Previous Buttons</button>
+        <button id="close-button">Close Buttons</button>
+        <button id="button-texts">Button Texts</button>
+        <button id="disabled-buttons">Disabled Buttons</button>
+        <button id="button-config-events">Button Listeners</button>
+        <button id="button-tour-events">Tour Button Listeners</button>
+        <button id="popover-hook-config">Popover Modified in Hook</button>
+      </div>
+
+      <br />
+      <p>You can modify the popover as well with custom CSS and JS.</p>
+      <div class="buttons">
+        <button id="custom-classes">Custom Classes</button>
+        <button id="popover-hook">Popover Hook</button>
+        <button id="padding-change">Padding Change</button>
+      </div>
+
+      <h2>Tour Feature</h2>
+      <p>Examples below show the tour usage of guidme.</p>
+      <div class="buttons">
+        <button id="basic-tour">Animated Tour</button>
+        <button id="non-animated-tour">Non-Animated Tour</button>
+        <button id="async-tour">Asynchronous Tour</button>
+        <button id="confirm-exit-tour">Confirm on Exit</button>
+        <button id="progress-tour">Progress Text</button>
+        <button id="progress-tour-template">Progress Text Template</button>
+        <button id="api-test">API Test</button>
+        <button id="reconfigure-steps">Re Configuring Steps</button>
+        <button id="disable-keyboard-control">Disable Keyboard Control</button>
+      </div>
+
+      <ul>
+        <li>Written in TypeScript</li>
+        <li>Lightweight — only 5kb gzipped</li>
+        <li>No dependencies</li>
+        <li>MIT Licensed</li>
+      </ul>
+
+      <ul id="hooks-list">
+        <li><strong>Hooks Button Demo — </strong>List of hooks fired</li>
+      </ul>
+
+      <h2>Yet another Tour Library?</h2>
+      <p>
+        No, it is not. Tours are just one of the many use-cases. guidme can be used wherever you need some sort of
+        overlay for the page; some common usecases could be: e.g. dimming the background when user is interacting with
+        some component, using it as a focus shifter to bring user's attention to some component on page, or using it to
+        simulate those "Turn off the Lights" widgets that you might have seen on video players online, etc.
+      </p>
+      <p class="second-para">
+        guidme is written in Vanilla JS, has zero dependencies and is highly customizable. It has several options
+        allowing you to manipulate how it behaves and also provides you the hooks to manipulate the elements as they are
+        highlighted, about to be highlighted, or deselected.
+      </p>
+
+      <h2 id="installation-head">Installation</h2>
+      <p>You can install it using yarn or npm, whatever you prefer.</p>
+
+      <pre>
+yarn add guidme
+npm install guidme</pre
+      >
+
+      <p>Or include it using CDN — put the version as guidme@0.5 in the name</p>
+
+      <pre>https://unpkg.com/guidme/dist/guidme.min.js</pre>
+
+      <h2>Usage and Demo</h2>
+
+      <p id="large-paragraph-text">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea
+        eligendi id in inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi
+        recusandae tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <div id="scrollable-area">
+        <p>
+          First -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Second -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p id="third-scroll-paragraph">
+          Third -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Fourth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Fifth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Sixth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Seventh -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Eighth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+        <p>
+          Ninth -> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dicta ipsum labore quod
+          tempora ullam? Alias consequatur doloremque laborum maxime necessitatibus nostrum odio, officiis quibusdam
+          veniam! Doloribus eos id quaerat.
+        </p>
+      </div>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis consectetur ea eligendi id in
+        inventore ipsa iure laudantium libero, minus molestias necessitatibus nesciunt non omnis, quasi recusandae
+        tempore voluptates!
+      </p>
+    </div>
+    <script type="module">
+      import { guidme } from "./src/guidme.ts";
+
+      const basicTourSteps = [
+        {
+          element: ".page-header",
+          popover: {
+            title: "New and Improved guidme",
+            description:
+              "guidme has been written from the ground up. The new version is more powerful, has less surprises, more customizable and tons of new features.",
+            side: "bottom",
+            align: "start",
+          },
+        },
+        {
+          element: ".page-header h1",
+          popover: {
+            title: "No Stacking Issues",
+            description:
+              "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+            side: "left",
+            align: "start",
+          },
+        },
+        {
+          element: ".page-header sup",
+          popover: {
+            title: "Improved Hooks",
+            description:
+              "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+            side: "bottom",
+            align: "start",
+          },
+        },
+        {
+          popover: {
+            title: "No Element",
+            description: "You can now have popovers without elements as well",
+          },
+        },
+        {
+          element: '.buttons',
+          popover: {
+            title: "Buttons",
+            description: "Here are some buttons",
+          },
+        },
+        {
+          element: "#scrollable-area",
+          popover: {
+            title: "Scrollable Areas",
+            description: "There are no issues with scrollable element tours as well.",
+          },
+        },
+        {
+          element: "#third-scroll-paragraph",
+          popover: {
+            title: "Nested Scrolls",
+            description: "Even the nested scrollable elements work now.",
+          },
+        },
+      ];
+
+      document.getElementById("non-animated-tour").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: false,
+          overlayColor: "blue",
+          overlayOpacity: 0.3,
+          showProgress: true,
+          steps: basicTourSteps,
+        });
+
+        guidme.drive();
+      });
+
+      document.getElementById("confirm-exit-tour").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: true,
+          overlayColor: "green",
+          overlayOpacity: 0.3,
+          steps: basicTourSteps,
+          onDestroyStarted: () => {
+            if (guidme.hasNextStep() && confirm("Are you sure?")) {
+              guidme.destroy();
+            } else {
+              guidme.destroy();
+            }
+          },
+        });
+
+        guidme.drive();
+      });
+
+      document.getElementById("progress-tour").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: true,
+          steps: basicTourSteps,
+          showProgress: true,
+        });
+
+        guidme.drive();
+      });
+
+      document.getElementById("progress-tour-template").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: true,
+          steps: basicTourSteps,
+          showProgress: true,
+          progressText: "{{current}} of {{total}} done",
+        });
+
+        guidme.drive();
+      });
+
+      document.getElementById("api-test").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: true,
+          steps: basicTourSteps,
+          disableActiveInteraction: true,
+          showProgress: true,
+          progressText: "{{current}} of {{total}} done",
+          onPopoverRender: (popover) => {
+            popover.title.innerHTML = `${guidme.getActiveIndex()} ${guidme.hasNextStep() ? 'Yes' : 'No'} ${guidme.hasPreviousStep() ? 'Yes' : 'No'}`
+            popover.description.innerHTML = `${guidme.isFirstStep() ? 'Yes' : 'No'} ${guidme.isLastStep() ? 'Yes' : 'No'}`
+
+            console.log(guidme.getActiveIndex());
+            console.log(guidme.getActiveStep());
+          }
+        });
+
+        guidme.drive(4);
+      });
+
+      document.getElementById("reconfigure-steps").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: true,
+          steps: basicTourSteps,
+          showProgress: true,
+        });
+
+        guidme.setSteps([
+          {
+            element: "h1",
+            popover: {
+              description: "This is a new description"
+            }
+          },
+          {
+            element: "p",
+            popover: {
+              description: "This is another new description"
+            }
+          }
+        ])
+
+        guidme.drive();
+      });
+
+      document.getElementById("disable-keyboard-control").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: true,
+          steps: basicTourSteps,
+          showProgress: true,
+          allowKeyboardControl: false,
+        });
+
+        guidme.setSteps([
+          {
+            element: "h1",
+            popover: {
+              description: "This is a new description"
+            }
+          },
+          {
+            element: "p",
+            popover: {
+              description: "This is another new description"
+            }
+          }
+        ])
+
+        guidme.drive();
+      });
+
+      document.getElementById("async-tour").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: true,
+          overlayOpacity: 0.3,
+          showProgress: true,
+          progressText: "{{current}} / {{total}}",
+          steps: [
+            {
+              element: ".page-header",
+              popover: {
+                title: "Async guidme",
+                description:
+                  "guidme has been written from the ground up. The new version is more powerful, has less surprises, more customizable and tons of new features.",
+                side: "bottom",
+                align: "start",
+              },
+            },
+            {
+              element: ".page-header h1",
+              popover: {
+                title: "Async Test",
+                description: "By overriding `onNextClick` you get control over the tour.",
+                side: "left",
+                align: "start",
+                onNextClick: () => {
+                  const newDiv = document.querySelector(".dynamic-el") || document.createElement("div");
+
+                  newDiv.innerHTML = "This is a new Element";
+                  newDiv.style.display = "block";
+                  newDiv.style.padding = "20px";
+                  newDiv.style.backgroundColor = "black";
+                  newDiv.style.color = "white";
+                  newDiv.style.fontSize = "14px";
+                  newDiv.style.position = "fixed";
+                  newDiv.style.top = `${Math.random() * (500 - 30) + 30}px`;
+                  newDiv.style.left = `${Math.random() * (500 - 30) + 30}px`;
+                  newDiv.className = "dynamic-el";
+
+                  document.body.appendChild(newDiv);
+
+                  guidme.moveNext();
+                },
+              },
+            },
+            {
+              element: ".dynamic-el",
+              onDeselected: element => {
+                element?.parentElement?.removeChild(element);
+              },
+              popover: {
+                title: "Dynamic Elements",
+                description: "This was created before we moved here",
+              },
+            },
+            {
+              element: ".page-header sup",
+              popover: {
+                title: "Improved Hooks",
+                description:
+                  "Unlike the older version, new version doesn't work with z-indexes so no more positional issues.",
+                side: "bottom",
+                align: "start",
+              },
+            },
+            {
+              popover: {
+                title: "No Element",
+                description: "You can now have popovers without elements as well",
+              },
+            },
+            {
+              element: "#scrollable-area",
+              popover: {
+                title: "Scrollable Areas",
+                description: "There are no issues with scrollable element tours as well.",
+              },
+            },
+            {
+              element: "#third-scroll-paragraph",
+              popover: {
+                title: "Nested Scrolls",
+                description: "Even the nested scrollable elements work now.",
+              },
+            },
+          ],
+        });
+
+        guidme.drive();
+      });
+
+      document.getElementById("basic-tour").addEventListener("click", () => {
+        const guidme = guidme({
+          showProgress: true,
+          showButtons: ["next", 'previous', 'close'],
+          steps: basicTourSteps,
+        });
+
+        guidme.drive();
+      });
+
+      document.getElementById("no-buttons").addEventListener("click", () => {
+        const guidme = guidme({});
+
+        guidme.highlight({
+          element: "#no-buttons",
+          popover: {
+            title: "No Buttons",
+            description:
+              "No buttons are shown by default for highlight. You can pass in the option to show the buttons you want.",
+          },
+        });
+      });
+
+      document.getElementById("buttons-from-popover").addEventListener("click", () => {
+        const guidme = guidme();
+
+        guidme.highlight({
+          element: "#buttons-from-popover",
+          popover: {
+            title: "No Buttons",
+            showButtons: ["close"],
+            description:
+              "No buttons are shown by default for highlight. You can pass in the option to show the buttons you want.",
+          },
+        });
+      });
+
+      document.getElementById("next-button").addEventListener("click", () => {
+        const guidme = guidme();
+
+        guidme.highlight({
+          element: "#next-button",
+          popover: {
+            title: "Next and Close",
+            showButtons: ["close", "next"],
+            description: "This one only has next and close buttons, nothing else.",
+          },
+        });
+      });
+
+      document.getElementById("previous-button").addEventListener("click", () => {
+        const guidme = guidme();
+
+        guidme.highlight({
+          element: "#previous-button",
+          popover: {
+            title: "Previous and Close",
+            showButtons: ["close", "previous"],
+            description: "This one only has previous and close buttons, nothing else.",
+          },
+        });
+      });
+
+      document.getElementById("next-prev-button").addEventListener("click", () => {
+        const guidme = guidme();
+
+        guidme.highlight({
+          element: "#next-prev-button",
+          popover: {
+            title: "Next and Previous Only",
+            showButtons: ["next", "previous"],
+            description: "This one only has next and previous buttons.",
+          },
+        });
+      });
+
+      document.getElementById("close-button").addEventListener("click", () => {
+        const guidme = guidme();
+
+        guidme.highlight({
+          element: "#close-button",
+          popover: {
+            title: "Close Only",
+            showButtons: ["close"],
+            description: "This one only has close button.",
+          },
+        });
+      });
+
+      document.getElementById("button-texts").addEventListener("click", () => {
+        const guidme = guidme({
+          prevBtnText: "<——",
+          nextBtnText: "——>",
+        });
+
+        guidme.highlight({
+          element: "#button-texts",
+          popover: {
+            side: "left",
+            title: "Button from Config",
+            showButtons: ["close", "next", "previous"],
+            nextBtnText: "==>",
+            prevBtnText: "<==",
+            description: "These buttons are configured using guidme config.",
+          },
+        });
+      });
+
+      document.getElementById("popover-hook").addEventListener("click", () => {
+        const guidme = guidme({
+          onPopoverRender: popover => {
+            popover.title.innerText = "Modified Parent";
+          },
+        });
+        guidme.highlight({
+          element: ".page-header",
+          popover: {
+            title: "Page Title",
+            description: "Body of the popover",
+            side: "bottom",
+            align: "start",
+            onPopoverRender: popover => {
+              popover.title.innerText = "Modified";
+            },
+          },
+        });
+      });
+
+      document.getElementById("padding-change").addEventListener("click", () => {
+        const guidme = guidme({
+          stagePadding: 0,
+          popoverOffset: 20,
+          stageRadius: 10,
+        });
+
+        guidme.highlight({
+          element: "#padding-change",
+          popover: {
+            title: "Page Title",
+            description: "Body of the popover",
+            side: "bottom",
+            align: "start",
+            onPopoverRender: popover => {
+              popover.title.innerText = "Modified";
+            },
+          },
+        });
+      });
+
+      document.getElementById("custom-classes").addEventListener("click", () => {
+        const guidme = guidme({
+          popoverClass: "custom-guidme-popover",
+        });
+
+        guidme.highlight({
+          popover: {
+            popoverClass: "custom-guidme-popover",
+            title: "Custom Classes",
+            description: "Popover and buttons have custom classes",
+            showButtons: ["close", "next", "previous"],
+          },
+        });
+      });
+
+      document.getElementById("disabled-buttons").addEventListener("click", () => {
+        const guidme = guidme();
+        guidme.highlight({
+          element: "#disabled-buttons",
+          popover: {
+            title: "Disable Buttons",
+            description: "You can selectively disable buttons as well",
+            showButtons: ["next", "previous", "close"],
+            disableButtons: ["next", "previous"],
+          },
+        });
+      });
+
+      document.getElementById("button-config-events").addEventListener("click", () => {
+        const guidme = guidme({
+          onNextClick: () => {
+            alert("Next Clicked");
+          },
+          onPrevClick: () => {
+            alert("Previous Clicked");
+          },
+          onCloseClick: () => {
+            guidme.destroy();
+          },
+        });
+
+        guidme.highlight({
+          popover: {
+            title: "Global Button Listener",
+            description: "You can listen to the button clicks globally.",
+            showButtons: ["close", "next", "previous"],
+            onPrevClick: () => alert("Overriding — Previous Clicked"),
+          },
+        });
+      });
+
+      document.getElementById("button-tour-events").addEventListener("click", () => {
+        const guidme = guidme({
+          onNextClick: () => {
+            alert("Next Clicked");
+            guidme.moveNext();
+          },
+          onPrevClick: () => {
+            alert("Previous Clicked");
+            guidme.movePrevious();
+          },
+          onCloseClick: () => {
+            guidme.destroy();
+          },
+          steps: [
+            { popover: { title: "Some title", description: "Some description" }},
+            { popover: { title: "Another title", description: "Some description" }},
+            { popover: { title: "Yet another title", description: "Some description" }},
+          ]
+        });
+
+        guidme.drive();
+      });
+
+      document.getElementById("popover-hook-config").addEventListener("click", () => {
+        const guidme = guidme({
+          onPopoverRender: popover => {
+            const firstButton = document.createElement("button");
+            firstButton.innerText = "First";
+            popover.footerButtons.appendChild(firstButton);
+
+            firstButton.addEventListener("click", () => {
+              console.log("First Button Clicked");
+            });
+          },
+          steps: [
+            { popover: { title: "Some title", description: "Some description" }},
+            { popover: { title: "Another title", description: "Some description" }},
+            { popover: { title: "Yet another title", description: "Some description" }},
+          ]
+        });
+
+        guidme.drive();
+      });
+
+      document.getElementById("is-active-btn").addEventListener("click", () => {
+        alert(guidme().isActive());
+      });
+
+      document.getElementById("backdrop-color-btn").addEventListener("click", () => {
+        guidme({
+          overlayColor: "blue",
+          overlayOpacity: 0.3,
+        }).highlight({
+          element: "#backdrop-color-btn",
+        });
+      });
+
+      document.getElementById("activate-check-btn").addEventListener("click", () => {
+        const guidme = guidme({
+          showButtons: false,
+        });
+
+        guidme.highlight({
+          element: "#activate-check-btn",
+          popover: {
+            title: "Check if guidme is active",
+            description: "This will alert the status after 2 seconds",
+            side: "bottom",
+            align: "start",
+          },
+        });
+
+        setTimeout(() => {
+          alert(`Status: ${guidme.isActive()}. Destroying guidme...`);
+          guidme.destroy();
+          setTimeout(() => {
+            alert(`Status: ${guidme.isActive()}`);
+          }, 0);
+        }, 2000);
+      });
+
+      document.getElementById("highlight-btn").addEventListener("click", () => {
+        guidme({
+          animate: true,
+          popoverOffset: 10,
+          stagePadding: 10,
+          onDeselected: (element, step) => {
+            console.log("Deselected element", element, step);
+          },
+          onHighlightStarted: (element, step) => {
+            console.log("Started highlighting element", element, step);
+          },
+          onHighlighted: (element, step) => {
+            console.log("Highlighted element", element, step);
+          },
+        }).highlight({
+          element: "h2",
+          popover: {
+            title: "MIT License",
+            description: "A lightweight, no-dependency JavaScript engine to drive user's focus.",
+            side: "bottom",
+            align: "start",
+          },
+        });
+      });
+
+      document.getElementById("simple-highlight-btn").addEventListener("click", () => {
+        guidme({ animate: false }).highlight({
+          element: "#large-paragraph-text",
+          popover: {
+            title: "guidme",
+            description:
+              "Highlight anything, anywhere on the page. Yes, literally anything including SVG portions, scrollable items etc.",
+            align: "start",
+            side: "top",
+          },
+        });
+      });
+
+      document.getElementById("dark-highlight-btn").addEventListener("click", () => {
+        guidme({
+          animate: true,
+          overlayOpacity: 0.9,
+        }).highlight({ element: "ul" });
+      });
+
+      document.getElementById("dim-highlight-btn").addEventListener("click", () => {
+        guidme({
+          animate: true,
+          overlayOpacity: 0.2,
+        }).highlight({ element: ".buttons" });
+      });
+
+      document.getElementById("transition-highlight-btn").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: true,
+          onDeselected: (element, step) => {
+            console.log("Deselected element", element, step);
+          },
+          onHighlightStarted: (element, step) => {
+            console.log("Started highlighting element", element, step);
+          },
+          onHighlighted: (element, step) => {
+            console.log("Highlighted element", element, step);
+          },
+        });
+
+        guidme.highlight({
+          popover: {
+            title: "guidme",
+            description: "Highlight anything, anywhere on the page",
+          },
+        });
+
+        window.setTimeout(() => {
+          guidme.highlight({
+            element: ".buttons button:first-child",
+            popover: {
+              title: "guidme",
+              description: "Highlight anything, anywhere on the page",
+            },
+          });
+        }, 2000);
+
+        window.setTimeout(() => {
+          guidme.highlight({
+            popover: {
+              title: "guidme",
+              description: "Highlight anything, anywhere on the page",
+            },
+          });
+        }, 4000);
+
+        window.setTimeout(() => {
+          guidme.highlight({
+            element: "h2",
+            popover: {
+              description: "guidme",
+            },
+          });
+        }, 6000);
+      });
+
+      document.getElementById("hooks").addEventListener("click", () => {
+        const pageHeader = document.getElementById(".page-header");
+
+        const guidme = guidme({
+          animate: true,
+          onDeselected: (element, step) => {
+            const elementText = element?.textContent?.slice(0, 10) || " - N/A -";
+            console.log(`Deselected: ${elementText}\n${JSON.stringify(step)}`);
+          },
+          onHighlightStarted: (element, step) => {
+            const elementText = element?.textContent?.slice(0, 10) || " - N/A -";
+            console.log(`Highlight Started: ${elementText}\n${JSON.stringify(step)}`);
+          },
+          onHighlighted: (element, step) => {
+            const elementText = element?.textContent?.slice(0, 10) || " - N/A -";
+            console.log(`Highlighted: ${elementText}\n${JSON.stringify(step)}`);
+          },
+          onDestroyed: (element, step) => {
+            const elementText = element?.textContent?.slice(0, 10) || " - N/A -";
+            console.log(`Destroyed: ${elementText}\n${JSON.stringify(step)}`);
+          },
+        });
+
+        guidme.highlight({
+          element: "#hooks",
+          popover: {
+            title: "Hooks",
+            description: "Here are all the hooks",
+          },
+        });
+
+        window.setTimeout(() => {
+          guidme.highlight({
+            popover: {
+              title: "Popup Hook",
+              description: "There is no element below this popover",
+            },
+          });
+        }, 1000);
+
+        window.setTimeout(() => {
+          guidme.highlight({
+            element: "#hooks-list",
+            popover: {
+              description: "Here are all the hooks",
+            },
+          });
+        }, 2000);
+      });
+
+      document.getElementById("scrollable-area-btn").addEventListener("click", () => {
+        const guidme = guidme({ animate: true });
+        guidme.highlight({ element: "#scrollable-area" });
+      });
+
+      document.getElementById("without-element-btn").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: true,
+          onDestroyed: (element, step) => {
+            console.log("Close modal", element, step);
+          },
+          onDeselected: (element, step) => {
+            console.log("Deselected element", element, step);
+          },
+          onHighlightStarted: (element, step, { config, state }) => {
+            console.log("Started highlighting element", element, step);
+          },
+          onHighlighted: (element, step) => {
+            console.log("Highlighted element", element, step);
+          },
+        });
+        guidme.highlight({
+          popover: {
+            showButtons: [],
+            description:
+              "<div class='gif-popover'><img style='max-width: 100%' src='https://i.imgur.com/EAQhHu5.gif' /><p>Go and build something cool!</p></div>",
+          },
+        });
+      });
+
+      document.getElementById("inner-scroll-area-btn").addEventListener("click", () => {
+        const guidme = guidme({ animate: true });
+        guidme.highlight({ element: "#third-scroll-paragraph" });
+      });
+
+      document.getElementById("disallow-close").addEventListener("click", () => {
+        const guidme = guidme({
+          animate: true,
+          allowClose: false,
+        });
+
+        guidme.highlight({
+          element: ".buttons",
+        });
+      });
+
+      document.getElementById("destroy-btn").addEventListener("click", () => {
+        guidme().destroy();
+      });
+    </script>
+  </body>
+</html>
