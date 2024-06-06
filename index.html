@@ -346,7 +346,7 @@ npm install guidme</pre
       </p>
     </div>
     <script type="module">
-      import { guidme } from "./src/guidme.ts";
+      import { guidme as guid } from "./src/guidme.ts";
 
       const basicTourSteps = [
         {
@@ -409,7 +409,7 @@ npm install guidme</pre
       ];
 
       document.getElementById("non-animated-tour").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: false,
           overlayColor: "blue",
           overlayOpacity: 0.3,
@@ -421,7 +421,7 @@ npm install guidme</pre
       });
 
       document.getElementById("confirm-exit-tour").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           overlayColor: "green",
           overlayOpacity: 0.3,
@@ -439,7 +439,7 @@ npm install guidme</pre
       });
 
       document.getElementById("progress-tour").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           steps: basicTourSteps,
           showProgress: true,
@@ -449,7 +449,7 @@ npm install guidme</pre
       });
 
       document.getElementById("progress-tour-template").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           steps: basicTourSteps,
           showProgress: true,
@@ -460,7 +460,7 @@ npm install guidme</pre
       });
 
       document.getElementById("api-test").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           steps: basicTourSteps,
           disableActiveInteraction: true,
@@ -479,7 +479,7 @@ npm install guidme</pre
       });
 
       document.getElementById("reconfigure-steps").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           steps: basicTourSteps,
           showProgress: true,
@@ -504,7 +504,7 @@ npm install guidme</pre
       });
 
       document.getElementById("disable-keyboard-control").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           steps: basicTourSteps,
           showProgress: true,
@@ -530,7 +530,7 @@ npm install guidme</pre
       });
 
       document.getElementById("async-tour").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           overlayOpacity: 0.3,
           showProgress: true,
@@ -620,7 +620,7 @@ npm install guidme</pre
       });
 
       document.getElementById("basic-tour").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           showProgress: true,
           showButtons: ["next", 'previous', 'close'],
           steps: basicTourSteps,
@@ -630,7 +630,7 @@ npm install guidme</pre
       });
 
       document.getElementById("no-buttons").addEventListener("click", () => {
-        const guidme = guidme({});
+        const guidme = guid({});
 
         guidme.highlight({
           element: "#no-buttons",
@@ -643,7 +643,7 @@ npm install guidme</pre
       });
 
       document.getElementById("buttons-from-popover").addEventListener("click", () => {
-        const guidme = guidme();
+        const guidme = guid();
 
         guidme.highlight({
           element: "#buttons-from-popover",
@@ -657,7 +657,7 @@ npm install guidme</pre
       });
 
       document.getElementById("next-button").addEventListener("click", () => {
-        const guidme = guidme();
+        const guidme = guid();
 
         guidme.highlight({
           element: "#next-button",
@@ -670,7 +670,7 @@ npm install guidme</pre
       });
 
       document.getElementById("previous-button").addEventListener("click", () => {
-        const guidme = guidme();
+        const guidme = guid();
 
         guidme.highlight({
           element: "#previous-button",
@@ -683,7 +683,7 @@ npm install guidme</pre
       });
 
       document.getElementById("next-prev-button").addEventListener("click", () => {
-        const guidme = guidme();
+        const guidme = guid();
 
         guidme.highlight({
           element: "#next-prev-button",
@@ -696,7 +696,7 @@ npm install guidme</pre
       });
 
       document.getElementById("close-button").addEventListener("click", () => {
-        const guidme = guidme();
+        const guidme = guid();
 
         guidme.highlight({
           element: "#close-button",
@@ -709,7 +709,7 @@ npm install guidme</pre
       });
 
       document.getElementById("button-texts").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           prevBtnText: "<——",
           nextBtnText: "——>",
         });
@@ -728,7 +728,7 @@ npm install guidme</pre
       });
 
       document.getElementById("popover-hook").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           onPopoverRender: popover => {
             popover.title.innerText = "Modified Parent";
           },
@@ -748,7 +748,7 @@ npm install guidme</pre
       });
 
       document.getElementById("padding-change").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           stagePadding: 0,
           popoverOffset: 20,
           stageRadius: 10,
@@ -769,7 +769,7 @@ npm install guidme</pre
       });
 
       document.getElementById("custom-classes").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           popoverClass: "custom-guidme-popover",
         });
 
@@ -784,7 +784,7 @@ npm install guidme</pre
       });
 
       document.getElementById("disabled-buttons").addEventListener("click", () => {
-        const guidme = guidme();
+        const guidme = guid();
         guidme.highlight({
           element: "#disabled-buttons",
           popover: {
@@ -797,7 +797,7 @@ npm install guidme</pre
       });
 
       document.getElementById("button-config-events").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           onNextClick: () => {
             alert("Next Clicked");
           },
@@ -820,7 +820,7 @@ npm install guidme</pre
       });
 
       document.getElementById("button-tour-events").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           onNextClick: () => {
             alert("Next Clicked");
             guidme.moveNext();
@@ -843,7 +843,7 @@ npm install guidme</pre
       });
 
       document.getElementById("popover-hook-config").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           onPopoverRender: popover => {
             const firstButton = document.createElement("button");
             firstButton.innerText = "First";
@@ -864,11 +864,11 @@ npm install guidme</pre
       });
 
       document.getElementById("is-active-btn").addEventListener("click", () => {
-        alert(guidme().isActive());
+        alert(guid().isActive());
       });
 
       document.getElementById("backdrop-color-btn").addEventListener("click", () => {
-        guidme({
+        guid({
           overlayColor: "blue",
           overlayOpacity: 0.3,
         }).highlight({
@@ -877,7 +877,7 @@ npm install guidme</pre
       });
 
       document.getElementById("activate-check-btn").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           showButtons: false,
         });
 
@@ -901,7 +901,7 @@ npm install guidme</pre
       });
 
       document.getElementById("highlight-btn").addEventListener("click", () => {
-        guidme({
+        guid({
           animate: true,
           popoverOffset: 10,
           stagePadding: 10,
@@ -926,7 +926,7 @@ npm install guidme</pre
       });
 
       document.getElementById("simple-highlight-btn").addEventListener("click", () => {
-        guidme({ animate: false }).highlight({
+        guid({ animate: false }).highlight({
           element: "#large-paragraph-text",
           popover: {
             title: "guidme",
@@ -939,21 +939,21 @@ npm install guidme</pre
       });
 
       document.getElementById("dark-highlight-btn").addEventListener("click", () => {
-        guidme({
+        guid({
           animate: true,
           overlayOpacity: 0.9,
         }).highlight({ element: "ul" });
       });
 
       document.getElementById("dim-highlight-btn").addEventListener("click", () => {
-        guidme({
+        guid({
           animate: true,
           overlayOpacity: 0.2,
         }).highlight({ element: ".buttons" });
       });
 
       document.getElementById("transition-highlight-btn").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           onDeselected: (element, step) => {
             console.log("Deselected element", element, step);
@@ -1005,7 +1005,7 @@ npm install guidme</pre
       document.getElementById("hooks").addEventListener("click", () => {
         const pageHeader = document.getElementById(".page-header");
 
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           onDeselected: (element, step) => {
             const elementText = element?.textContent?.slice(0, 10) || " - N/A -";
@@ -1053,12 +1053,12 @@ npm install guidme</pre
       });
 
       document.getElementById("scrollable-area-btn").addEventListener("click", () => {
-        const guidme = guidme({ animate: true });
+        const guidme = guid({ animate: true });
         guidme.highlight({ element: "#scrollable-area" });
       });
 
       document.getElementById("without-element-btn").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           onDestroyed: (element, step) => {
             console.log("Close modal", element, step);
@@ -1083,12 +1083,12 @@ npm install guidme</pre
       });
 
       document.getElementById("inner-scroll-area-btn").addEventListener("click", () => {
-        const guidme = guidme({ animate: true });
+        const guidme = guid({ animate: true });
         guidme.highlight({ element: "#third-scroll-paragraph" });
       });
 
       document.getElementById("disallow-close").addEventListener("click", () => {
-        const guidme = guidme({
+        const guidme = guid({
           animate: true,
           allowClose: false,
         });
@@ -1099,7 +1099,7 @@ npm install guidme</pre
       });
 
       document.getElementById("destroy-btn").addEventListener("click", () => {
-        guidme().destroy();
+        guid().destroy();
       });
     </script>
   </body>
